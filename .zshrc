@@ -28,3 +28,7 @@ alias kubectl='microk8s kubectl'
 alias k8s_dash='kubectl port-forward -n kube-system service/kubernetes-dashboard --address 127.0.0.1 10443:443'
 # dotfiles config
 alias config='/usr/bin/git --git-dir=/home/abd/.cfg/ --work-tree=/home/abd'
+# stream to HDMI
+alias extend_hdmi='xrandr --output eDP-1 --auto --output HDMI-2 --auto --right-of eDP-1'
+
+alias check_battery='upower -i `upower -e | grep 'BAT'`'

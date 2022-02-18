@@ -48,7 +48,7 @@ height = 30
 offset-x = 20
 offset-y = 20
 
-modules-left = sysmenu date time pulseaudio brightness ssid spotify-icon spotify
+modules-left = sysmenu date time pulseaudio brightness battery batterylow ssid spotify-icon spotify
 
 [bar/secondary]
 inherit = bar/main
@@ -71,10 +71,9 @@ pseudo-transparency = true
 
 modules-left = workspaces name title
 
-[bar/secondary-lvds]
+[bar/secondary-hdmi]
+monitor = HDMI-2
 inherit = bar/main
-monitor = LVDS1
-
 width = 35%
 height = 30
 
@@ -82,6 +81,15 @@ offset-x = 63.5%
 offset-y = 20
 
 module-margin-left = 0
+
+tray-offset-x = -12
+tray-offset-y = 0
+tray-maxsize = 18
+tray-detached = true
+tray-position = right
+tray-padding = 2
+tray-scale = 1.0
+pseudo-transparency = true
 
 modules-left = workspaces name title
 
@@ -281,3 +289,28 @@ format-prefix = "  "
 format-suffix = "%"
 format = <label>
 format-foreground = ${color.amber}
+
+[module/battery]                                                                                      
+type = internal/battery                                                                               
+battery = BAT0                                                                                        
+adapter = AC                                                                                          
+full-at = 98                                                                                          
+                                                                                                      
+format-charging = <label-charging>                                               
+                                                                                                      
+format-discharging = <label-discharging>                                      
+                                                                                                      
+format-full-prefix = " "                                                                             
+format-full-foreground = ${color.green}                                              
+
+format-charging-prefix = " "
+format-charging-foreground = ${color.green}
+
+format-discharging-prefix = " "
+format-discharging-foreground = ${color.red}
+
+[module/batterylow]
+;this script warns about low battery
+type = custom/script
+exec = ~/.local/bin/batery-low.sh
+interval = 300
