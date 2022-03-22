@@ -8,6 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export PATH=$HOME/.local/bin:$PATH
 fpath+=$HOME/.zsh/pure
 autoload -U promptinit; promptinit
+autoload -Uz compinit && compinit
 prompt pure
 
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
@@ -33,9 +34,10 @@ alias extend_hdmi='xrandr --output eDP-1 --auto --output HDMI-2 --auto --right-o
 
 alias check_battery='upower -i `upower -e | grep 'BAT'`'
 
-alias copy_das5='scp -i ~/.ssh/id_das5 -r ~/dev/UvA-2022-P4-PMMS pmms2207@fs0.das5.cs.vu.nl:~'
-alias copy_csv='scp -i ~/.ssh/id_das5 das5:~/UvA-2022-P4-PMMS/res_vecsort.csv ~/dev/UvA-2022-P4-PMMS'
+alias copy_das5='scp -i ~/.ssh/id_das5 -r ~/dev/UvA-2022-P4-PMMS das5:~'
+alias copy_csv='scp -i ~/.ssh/id_das5 -r das5:~/UvA-2022-P4-PMMS/CSVs/assignment_3 ~/dev/UvA-2022-P4-PMMS/CSVs/'
 alias nnn='nnn -e' # -d for details and -e to open files in $VISUAL (for other options, see 'man nnn'...)
+alias ssh='kitty +kitten ssh'
 #-----
 #export NNN_OPTS="H" # 'H' shows the hidden files. Same as option -H (so 'nnn -deH')
 # export NNN_OPTS="deH" # if you prefer to have all the options at the same place
