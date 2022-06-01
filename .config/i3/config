@@ -194,3 +194,9 @@ for_window [class=".*"] border pixel 0
 gaps inner 10
 gaps outer 20
 gaps top 50
+
+# Make the currently focused window a scratchpad
+bindsym $mod+Shift+BackSpace move scratchpad
+
+# Show the first scratchpad window
+bindsym $mod+BackSpace scratchpad show
