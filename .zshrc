@@ -60,3 +60,5 @@ n () # to cd on quit
             rm -f "$NNN_TMPFILE" > /dev/null
     fi
 }
+
+#export LIBVA_DRIVER_NAME=nouveau

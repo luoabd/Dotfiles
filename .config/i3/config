@@ -40,7 +40,8 @@ exec --no-startup-id nm-applet
 exec_always --no-startup-id picom --experimental-backends --backend glx
 # Start polybar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
+# Start gestres
+exec_always --no-startup-id libinput-gestures-setup restart
 # Start screencloud
 exec --no-startup-id ~/Downloads/ScreenCloud-v1.5.3-x86_64.AppImage
 # Use pactl to adjust volume in PulseAudio.
