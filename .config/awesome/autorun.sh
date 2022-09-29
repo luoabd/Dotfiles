@@ -7,4 +7,4 @@ run() {
   fi
 }
 
-run "$HOME/.local/bin/battery-low.sh"
+#run "$HOME/.local/bin/battery-low.sh"

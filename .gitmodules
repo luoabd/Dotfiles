@@ -1,0 +1,3 @@
+[submodule ".config/awesome/modules/color"]
+	path = .config/awesome/modules/color
+	url = git@github.com:andOrlando/color.git
