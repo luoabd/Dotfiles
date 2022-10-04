@@ -7,6 +7,54 @@ local wibox = require("wibox")
 local helpers = require("helpers")
 local lock_screen = require("modules.lockscreen")
 
+-- TODO: Automatically use current background
+local wall_dir = gears.filesystem.get_configuration_dir() .. 'wallpapers/'
+local default_wall_name = 'pixel_girl.jpg'
+gears.debug.print_error(beautiful.get('wallpaper'))
+-- Temp dir
+local tmp_wall_dir = '/tmp/awesomewm/' .. os.getenv('USER') .. '/'
+
+local background_mode = 'blur'
+
+-- Imagemagick convert command that will crop, resize and blur the background image
+local return_cmd_str_to_blur = function(wall_name, index, ap, width, height)
+	local magic = [[
+	if [ ! -d ]] .. tmp_wall_dir ..[[ ]; then mkdir -p ]] .. tmp_wall_dir .. [[; fi
+	convert -quality 100 -filter Gaussian -blur 0x10 ]] .. wall_dir .. wall_name .. 
+	[[ -gravity center -crop ]] .. ap .. [[:1 +repage -resize ]] .. width .. 'x' .. height .. 
+	[[! ]] .. tmp_wall_dir .. index .. wall_name .. [[
+	]]
+	return magic
+end
+
+local blur_bg = function(wall_name)
+	for s in screen do
+		local index = s.index .. "-"
+
+		local screen_width = s.geometry.width
+		local screen_height = s.geometry.height
+
+		local aspect_ratio = screen_width / screen_height
+
+		aspect_ratio = math.floor(aspect_ratio * 100) / 100
+
+		local cmd = return_cmd_str_to_blur(wall_name, index, aspect_ratio, screen_width, screen_height)
+
+		if s.index == 1 then
+			awful.spawn.easy_async_with_shell(cmd, function(stdout, stderr)
+				lock_screen_box.bgimage = tmp_wall_dir .. index .. wall_name
+			end)
+		else
+			-- TODO: Apply the blur to other monitors as well
+
+			-- awful.spawn.easy_async_with_shell(cmd, function() 
+			-- 	lock_screen_box.bgimage = tmp_wall_dir .. index .. wall_name
+			-- end)
+		end
+
+	end
+end
+
 --- Word Clock Lock Screen
 --- ~~~~~~~~~~~~~~~~~~~~~~
 
@@ -32,6 +80,7 @@ lock_screen_box.fg = "#edeff0" ---white
 
 --- Add lockscreen to each screen
 awful.screen.connect_for_each_screen(function(s)
+	local index = s.index .. "-"
 	if s == screen.primary then
 		s.mylockscreen = lock_screen_box
 	else
@@ -367,6 +416,7 @@ local function grab_password()
 end
 
 function lock_screen_show()
+	blur_bg(default_wall_name)
 	set_visibility(true)
 	grab_password()
 end

@@ -92,7 +92,7 @@ theme.layout_cornersw   = themes_path .. "gruvbox/layouts/cornersw.png"
 theme.layout_cornerse   = themes_path .. "gruvbox/layouts/cornerse.png"
 -- }}}
 
-theme.wallpaper = gears.filesystem.get_configuration_dir() .. "157.jpg"
+theme.wallpaper = gears.filesystem.get_configuration_dir() .. "wallpapers/pixel_girl.jpg"
 
 return theme
 
