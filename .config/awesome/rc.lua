@@ -21,6 +21,7 @@ require("awful.hotkeys_popup.keys")
 -- Widgets
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 local logout_menu_widget = require("awesome-wm-widgets.logout-menu-widget.logout-menu")
+local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 
 require("configuration")
 require("modules")
@@ -206,7 +207,10 @@ awful.screen.connect_for_each_screen(function(s)
         nil, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-	    batteryarc_widget(),
+            brightness_widget{
+                program = 'brightnessctl',
+            },
+            batteryarc_widget(),
             wibox.widget.systray(),
             mytextclock,
 	    logout_menu_widget({
@@ -278,7 +282,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.

@@ -113,8 +113,13 @@ globalkeys = gears.table.join(
     --- Lockscreen
     awful.key({ modkey, alt }, "l", function()
         lock_screen_show()
-    end, { description = "lock screen", group = "hotkeys" })
-          
+    end, { description = "lock screen", group = "hotkeys" }),
+
+    --- Printscreen
+    awful.key({ }, "Print", function()
+	awful.util.spawn("flameshot gui")
+    end, { description = "screenshot", group = "hotkeys" })
+    
 )
 
 clientkeys = gears.table.join(
