@@ -5,6 +5,7 @@
 export ZSH="$HOME/.oh-my-zsh"
 export PATH=$HOME/.local/bin:$PATH
 export EDITOR=nvim
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -74,6 +75,7 @@ ZSH_THEME="robbyrussell"
 plugins=(python)
 
 source $ZSH/oh-my-zsh.sh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # User configuration
 
@@ -107,3 +109,5 @@ alias check_battery='upower -i `upower -e | grep 'BAT'`'
 alias ssh='kitty +kitten ssh'
 alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias swap_bluetooth='/home/luoabd/swap_bluetooth.sh'
+alias kubectl='minikube kubectl --'
+alias ls_pac="expac -H M '%m %n' | sort -n | tail"
